@@ -45,7 +45,6 @@ public class ReentrantLockDemo {
                 @Override
                 public void run() {
                     for (int n = 0; n < 20; n++) {
-                        System.out.print(Thread.currentThread().getName()+"尝试生产-----" + n + "\n");
                         lockDemo.put();
                     }
                 }
@@ -62,6 +61,8 @@ public class ReentrantLockDemo {
                 System.out.print(Thread.currentThread().getName() + "等待" + "\n");
                 productCondition.await();
             }
+
+            Thread.sleep(300);
             count++;
             contanier.add("hhhahhah");
             System.out.print(Thread.currentThread().getName() + "生产一个" + "容器剩：" + count + "\n");

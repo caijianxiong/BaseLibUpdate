@@ -3,7 +3,9 @@ package com.example.testdemo.activity.thread;
 import com.example.testdemo.R;
 
 import java.util.Enumeration;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -211,6 +213,11 @@ public class ThreadActivity extends BaseActivity {
 //        };
 //        new Thread(runnable, "thread01").start();
 //        new Thread(runnable, "thread02").start();
+
+
+        //
+        //阻塞式容器  实现生产者消费者
+        BlockingQueue<String> blockingQueue = new LinkedBlockingQueue<>();
 
 
         /**

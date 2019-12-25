@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.testdemo.activity.CollectionActivity;
+import com.example.testdemo.activity.custom_view.CustomViewActivity;
 import com.example.testdemo.activity.thread.ThreadActivity;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     private Map<String, String> hashMap;
-    private Button btnCollection, btnThread;
+    private Button btnCollection, btnThread, btCustomView;
 
     @Override
     public int getLayoutId() {
@@ -28,9 +29,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void initView() {
         btnCollection = (Button) findViewById(R.id.btnCollection);
         btnThread = (Button) findViewById(R.id.btnThread);
+        btCustomView = (Button) findViewById(R.id.btCustomView);
 
         btnCollection.setOnClickListener(this);
         btnThread.setOnClickListener(this);
+        btCustomView.setOnClickListener(this);
     }
 
     @Override
@@ -48,6 +51,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.btnThread:
                 startActivity(ThreadActivity.class);
+                break;
+
+            case R.id.btCustomView:
+                startActivity(CustomViewActivity.class);
                 break;
         }
     }
