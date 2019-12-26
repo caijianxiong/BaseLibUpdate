@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.example.testdemo.activity.CollectionActivity;
 import com.example.testdemo.activity.custom_view.CustomViewActivity;
+import com.example.testdemo.activity.custom_view.StepViewActivity;
 import com.example.testdemo.activity.thread.ThreadActivity;
 
 import java.util.HashMap;
@@ -54,7 +55,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
 
             case R.id.btCustomView:
-                startActivity(CustomViewActivity.class);
+//                startActivity(CustomViewActivity.class);
+                startActivity(StepViewActivity.class);
                 break;
         }
     }
