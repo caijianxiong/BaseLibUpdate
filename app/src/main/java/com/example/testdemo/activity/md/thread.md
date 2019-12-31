@@ -15,6 +15,8 @@ reentrantLock 手动锁  参数为true即为公平锁，可以手动控制锁，
 支持多线程的容器
 BlockingQueue
 
+Thread  join方法：  t.join调用该方法，会阻塞当前线程，，直到t线程执行完，当前线程才会继续执行
+
 
 1，同步锁
 2，同步容器，阻塞队列容器
