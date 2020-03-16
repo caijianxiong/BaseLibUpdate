@@ -57,8 +57,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
 
             case R.id.btCustomView:
-//                startActivity(CustomViewActivity.class);
-                startActivity(StepViewActivity.class);
+                startActivity(CustomViewActivity.class);
+//                startActivity(StepViewActivity.class);
                 break;
         }
     }

@@ -107,7 +107,7 @@ public class ProducerCustomDemo {
         container.remove(0);
         count--;
         System.out.print(Thread.currentThread().getName() + "消费一个产品" + "容器产品数：" + count + "\n");
-        notifyAll();//走完了释放锁
+        notifyAll();//唤醒其他等待的线程
     }
 
     private synchronized void put(String product) {
@@ -127,7 +127,8 @@ public class ProducerCustomDemo {
         container.add(product);
         count++;
         System.out.print(Thread.currentThread().getName() + "生产一个产品" + "容器产品数：" + count + "--还剩产品：" + allCount + "\n");
-        notifyAll();//走完了释放锁
+        notifyAll();
+        //走完了释放锁
     }
 
 }

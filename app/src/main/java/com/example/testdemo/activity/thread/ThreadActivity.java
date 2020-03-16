@@ -1,5 +1,8 @@
 package com.example.testdemo.activity.thread;
 
+import android.os.Handler;
+import android.os.Message;
+
 import com.example.testdemo.R;
 
 import java.util.Enumeration;
@@ -21,6 +24,13 @@ public class ThreadActivity extends BaseActivity {
     private volatile int n;
     private CountDownLatch downLatch;
     private ReentrantLock lock1;
+
+    private Handler handler=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            return false;
+        }
+    });
 
     @Override
     public int getLayoutId() {

@@ -13,3 +13,9 @@
    答：前提，key的值得hashcode一定得是唯一的，，减少hash碰撞的概率，
    String的值是final的，不可变的，而且已经重写好了equals和HashCode方法，
    可以用任何对象作为KEY，只要正确的重写了equals和HashCode方法，并且这个对象作为key 后不可改变
+
+   hashMap   hashTable的区别
+   1，两者都实现了map接口，底层实现均是数组加列表
+   2，hashMap线程不安全，，存值KV可以为null----判断某个值是否存在  contain（key）fail-fast迭代器多线程会跑出异常
+   3，hashTable线程安全存值取值都可以为null，迭代器是fail-safe
+   4，

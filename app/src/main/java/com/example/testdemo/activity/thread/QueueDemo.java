@@ -42,7 +42,7 @@ public class QueueDemo {
                         String s = queue.poll();//取出容器第一个的值
                         if (s == null)
                             break;
-                        System.out.print("销售处：" + s+"\n");
+                        System.out.print("thread:"+Thread.currentThread().getName()+"---销售处：" + s+"\n");
                     }
                 }
             }, "thread--" + i).start();

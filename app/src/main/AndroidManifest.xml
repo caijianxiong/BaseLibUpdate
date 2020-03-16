@@ -22,7 +22,7 @@
         <activity android:name=".activity.thread.ThreadActivity" />
         <activity android:name=".activity.custom_view.CustomViewActivity" />
         <activity android:name=".activity.custom_view.StepViewActivity" />
-        <activity android:name=".activity.handler.HandlerActivity"></activity>
+        <activity android:name=".activity.handler.HandlerActivity"/>
     </application>
 
 </manifest>

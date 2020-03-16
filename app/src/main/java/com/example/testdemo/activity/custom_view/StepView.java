@@ -97,6 +97,7 @@ public class StepView extends View {
         init(context);
     }
 
+
     public void setCurrentStep(int currentStep) {
         this.currentStep = currentStep;
         invalidate();
@@ -218,18 +219,18 @@ public class StepView extends View {
 //            } else {
 //                mCirclePaint.setColor(Color.GRAY);
 //            }
-            canvas.drawCircle(x, y, iconWidth/2, mCirclePaint);
+            canvas.drawCircle(x, y, iconWidth / 2, mCirclePaint);
 //            logUtil.d_2(TAG, "cx=" + x + "---iconWidth=" + iconWidth / 2f);
 
 
-            int left= (int) (marginStartAndEnd + (i - 1) * iconWidth + (i - 1) * middleLinWidth);
-            int top=contentHieght / 2-iconWidth/2;
+            int left = (int) (marginStartAndEnd + (i - 1) * iconWidth + (i - 1) * middleLinWidth);
+            int top = contentHieght / 2 - iconWidth / 2;
             //Rect src：对原图片的裁剪区域
             //RectF dst：将（裁剪完的）原图片绘制到View控件上的区域
             if (i <= currentStep) {
-                canvas.drawBitmap(iconChecks.get(i-1),null,new Rect(left,top,left+iconWidth,top+iconWidth),bitmapPaint);
+                canvas.drawBitmap(iconChecks.get(i - 1), null, new Rect(left, top, left + iconWidth, top + iconWidth), bitmapPaint);
             } else {
-                canvas.drawBitmap(iconNomals.get(i-1),null,new Rect(left,top,left+iconWidth,top+iconWidth),bitmapPaint);
+                canvas.drawBitmap(iconNomals.get(i - 1), null, new Rect(left, top, left + iconWidth, top + iconWidth), bitmapPaint);
             }
 
         }
