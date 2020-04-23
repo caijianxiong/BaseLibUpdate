@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         String sha256=SignUtil.getAppSignatureSHA256(this,this.getPackageName());
 
         Log.i(TAG, "sha1: "+sha1+"\n"+"md5:"+md5+"\n"+"sha256:"+sha256);
+
     }
 
     @Override
