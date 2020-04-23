@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 25
     defaultConfig {
         applicationId "com.example.testdemo"
@@ -9,11 +10,46 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "default"
     }
+
+
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'key03'
+            keyPassword '456789'
+            storeFile file('D:/work/AGitProject/TestForNewWork/app/my02.jks')
+            storePassword '456789'
+        }
+        debug {
+            keyAlias 'key03'
+            keyPassword '456789'
+            storeFile file('D:/work/AGitProject/TestForNewWork/app/my02.jks')
+            storePassword '456789'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        big {
+            minSdkVersion 22
+
+        }
+        small {
+            minSdkVersion 17
         }
     }
 }

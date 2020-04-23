@@ -1,17 +1,13 @@
 package com.example.testdemo;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.testdemo.activity.CollectionActivity;
 import com.example.testdemo.activity.custom_view.CustomViewActivity;
-import com.example.testdemo.activity.custom_view.StepViewActivity;
 import com.example.testdemo.activity.handler.HandlerActivity;
-import com.example.testdemo.activity.thread.ThreadActivity;
-
-import java.util.HashMap;
+import com.example.testdemo.utils.SignUtil;
 import java.util.Map;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
@@ -36,6 +32,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnCollection.setOnClickListener(this);
         btnThread.setOnClickListener(this);
         btCustomView.setOnClickListener(this);
+
+        String sha1=SignUtil.getAppSignatureSHA1(this,this.getPackageName());
+        String md5=SignUtil.getAppSignatureMD5(this,this.getPackageName());
+        String sha256=SignUtil.getAppSignatureSHA256(this,this.getPackageName());
+
+        Log.i(TAG, "sha1: "+sha1+"\n"+"md5:"+md5+"\n"+"sha256:"+sha256);
     }
 
     @Override

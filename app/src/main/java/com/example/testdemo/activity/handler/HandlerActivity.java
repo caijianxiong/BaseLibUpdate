@@ -1,5 +1,6 @@
 package com.example.testdemo.activity.handler;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -27,6 +28,13 @@ public class HandlerActivity extends BaseActivity {
     private Handler handlerThread;
     private Button btn01;
 
+    @SuppressLint("HandlerLeak")
+    private static Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     public int getLayoutId() {

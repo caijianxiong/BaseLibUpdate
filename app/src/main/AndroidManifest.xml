@@ -23,6 +23,11 @@
         <activity android:name=".activity.custom_view.CustomViewActivity" />
         <activity android:name=".activity.custom_view.StepViewActivity" />
         <activity android:name=".activity.handler.HandlerActivity"/>
+        
+        <provider
+            android:authorities="com.example.testdemo.ContentProvider"
+            android:exported="true"
+            android:name=".sqlte.WeContentProvider"/>
     </application>
 
 </manifest>
