@@ -1,8 +1,7 @@
 package com.example.testdemo.design.factory;
 
-import com.example.testdemo.design.Product;
-
 /**
+ * 简单工厂模式
  * 工厂负责生产不同类型的对象，，外界根据传入不同的类型，取的产品，而不用在意生产的过程
  */
 public class ProductFactory {

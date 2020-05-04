@@ -41,6 +41,12 @@ public class HandlerActivity extends BaseActivity {
         return R.layout.activity_handler;
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     @Override
     public void initView() {
         btn01 = (Button) findViewById(R.id.btn01);

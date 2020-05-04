@@ -1,4 +1,4 @@
-package com.example.testdemo.design;
+package com.example.testdemo.design.factory;
 
 public interface Product {
 
