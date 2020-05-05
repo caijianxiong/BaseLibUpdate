@@ -8,9 +8,16 @@ import com.example.testdemo.activity.CollectionActivity;
 import com.example.testdemo.activity.custom_view.CustomViewActivity;
 import com.example.testdemo.activity.handler.HandlerActivity;
 import com.example.testdemo.utils.SignUtil;
+
+import java.io.IOException;
 import java.util.Map;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
+import cjx.liyueyun.baselib.base.mvp.net.HttpUtils;
+import cjx.liyueyun.baselib.base.mvp.net.MyCallback;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -38,6 +45,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         String sha256=SignUtil.getAppSignatureSHA256(this,this.getPackageName());
 
         Log.i(TAG, "sha1: "+sha1+"\n"+"md5:"+md5+"\n"+"sha256:"+sha256);
+
+
+        HttpUtils.getInstance().get().url("").enqueue(new MyCallback<String>() {
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+
+            @Override
+            public void onSuccess(String s) {
+
+            }
+        });
+
+        HttpUtils.getInstance().post().url("").param("","").header("","").enqueue(new MyCallback<String>() {
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+
+            @Override
+            public void onSuccess(String s) {
+
+            }
+        });
 
     }
 
