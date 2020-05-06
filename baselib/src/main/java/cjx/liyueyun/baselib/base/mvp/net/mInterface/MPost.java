@@ -1,7 +1,9 @@
-package cjx.liyueyun.baselib.base.mvp.net;
+package cjx.liyueyun.baselib.base.mvp.net.mInterface;
 
 import java.io.File;
 import java.util.Map;
+
+import cjx.liyueyun.baselib.base.mvp.net.PostRequest;
 
 
 public interface MPost {

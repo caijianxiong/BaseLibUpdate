@@ -3,15 +3,14 @@ package cjx.liyueyun.baselib.base.mvp.net;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+import cjx.liyueyun.baselib.base.mvp.net.mInterface.IRequest;
+import cjx.liyueyun.baselib.base.mvp.net.mInterface.MPost;
+import cjx.liyueyun.baselib.base.mvp.net.mInterface.MyCallback;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -74,13 +73,8 @@ public class PostRequest implements IRequest, MPost {
                 if (TextUtils.isEmpty(responseData)) {
                     callback.onFailure(new RuntimeException(" response is null"));
                 } else {
-                    Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-                    if (entityClass == String.class) {
-                        callback.onSuccess((T) responseData);
-                        return;
-                    }
-                    T bean = new Gson().fromJson(responseData, entityClass);
-                    callback.onSuccess(bean);
+                    ResponseTransformer<T> transformer=new ResponseTransformer<T>();
+                    callback.onSuccess(transformer.transform(responseData));
                 }
 
             }

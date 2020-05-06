@@ -1,4 +1,4 @@
-package cjx.liyueyun.baselib.base.mvp.net;
+package cjx.liyueyun.baselib.base.mvp.net.mInterface;
 
 import android.support.annotation.NonNull;
 

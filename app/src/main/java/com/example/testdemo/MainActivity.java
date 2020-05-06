@@ -1,5 +1,6 @@
 package com.example.testdemo;
 
+import android.Manifest;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -9,17 +10,16 @@ import com.example.testdemo.activity.custom_view.CustomViewActivity;
 import com.example.testdemo.activity.handler.HandlerActivity;
 import com.example.testdemo.utils.SignUtil;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.prefs.PreferencesFactory;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
 import cjx.liyueyun.baselib.base.mvp.net.HttpUtils;
-import cjx.liyueyun.baselib.base.mvp.net.MyCallback;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import cjx.liyueyun.baselib.base.mvp.net.mInterface.MyCallback;
+import cjx.liyueyun.baselib.base.mvp.permission.PermissionHelper;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, PermissionHelper.PermissionListener {
 
 
     private Map<String, String> hashMap;
@@ -73,9 +73,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
+
+
+
     @Override
     public void initData() {
-
+        //申请权限
+        String[] permissions=new String[]{Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (!PermissionHelper.hasPermissions(this, permissions)){
+            PermissionHelper.requestPermissions(this,
+                    permissions,
+                    this);
+        }
 
     }
 
@@ -96,5 +107,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //                startActivity(StepViewActivity.class);
                 break;
         }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionHelper.onRequestPermissionsResult(requestCode,permissions,grantResults);
+    }
+
+    @Override
+    public void onGranted() {
+
+    }
+
+    @Override
+    public void onGranted(List<String> grantedPermission) {
+
+    }
+
+    @Override
+    public void onDenied(List<String> deniedPermission) {
+
     }
 }
