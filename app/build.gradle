@@ -14,7 +14,6 @@ android {
     }
 
 
-
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
@@ -22,20 +21,21 @@ android {
         abortOnError false
     }
 
-//    signingConfigs {
-//        release {
-//            keyAlias 'key03'
-//            keyPassword '456789'
-//            storeFile file('D:/work/AGitProject/TestForNewWork/app/my02.jks')
-//            storePassword '456789'
-//        }
-//        debug {
-//            keyAlias 'key03'
-//            keyPassword '456789'
-//            storeFile file('D:/work/AGitProject/TestForNewWork/app/my02.jks')
-//            storePassword '456789'
-//        }
-//    }
+    signingConfigs {
+        release {
+            keyAlias 'key03'
+            keyPassword '456789'
+            storeFile file('../app/my02.jks')
+            storePassword '456789'
+        }
+        debug {
+            keyAlias 'key03'
+            keyPassword '456789'
+            storeFile file('../app/my02.jks')
+            storePassword '456789'
+        }
+
+    }
 
     buildTypes {
         release {

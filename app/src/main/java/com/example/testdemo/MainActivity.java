@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.prefs.PreferencesFactory;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
+import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 import cjx.liyueyun.baselib.base.mvp.net.HttpUtils;
 import cjx.liyueyun.baselib.base.mvp.net.mInterface.MyCallback;
 import cjx.liyueyun.baselib.base.mvp.permission.PermissionHelper;
@@ -40,36 +41,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         btnThread.setOnClickListener(this);
         btCustomView.setOnClickListener(this);
 
-        String sha1=SignUtil.getAppSignatureSHA1(this,this.getPackageName());
-        String md5=SignUtil.getAppSignatureMD5(this,this.getPackageName());
-        String sha256=SignUtil.getAppSignatureSHA256(this,this.getPackageName());
+        logUtil.d("TAG","onCreate");
+        logUtil.w("TAG","onCreate");
 
-        Log.i(TAG, "sha1: "+sha1+"\n"+"md5:"+md5+"\n"+"sha256:"+sha256);
-
-
-        HttpUtils.getInstance().get().url("").enqueue(new MyCallback<String>() {
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-
-            @Override
-            public void onSuccess(String s) {
-
-            }
-        });
-
-        HttpUtils.getInstance().post().url("").param("","").header("","").enqueue(new MyCallback<String>() {
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-
-            @Override
-            public void onSuccess(String s) {
-
-            }
-        });
 
     }
 
@@ -79,14 +53,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void initData() {
         //申请权限
-        String[] permissions=new String[]{Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE};
-        if (!PermissionHelper.hasPermissions(this, permissions)){
-            PermissionHelper.requestPermissions(this,
-                    permissions,
-                    this);
-        }
+//        String[] permissions=new String[]{Manifest.permission.READ_PHONE_STATE,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE};
+//        if (!PermissionHelper.hasPermissions(this, permissions)){
+//            PermissionHelper.requestPermissions(this,
+//                    permissions,
+//                    this);
+//        }
 
     }
 
