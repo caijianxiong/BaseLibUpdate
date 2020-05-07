@@ -7,7 +7,7 @@ import android.os.Looper;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
+import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 
 /**
  * 统一线程池
@@ -67,7 +67,7 @@ public class WeExecutor {
                 try {
                     runnable.run();
                 } catch (Exception e) {
-                    logUtil.d_2("WeExecutor run error:", e.getMessage());
+                   logUtil.d("WeExecutor run error:", e.getMessage());
                 }
             }
         }

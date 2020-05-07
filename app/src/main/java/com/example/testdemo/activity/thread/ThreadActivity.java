@@ -5,15 +5,13 @@ import android.os.Message;
 
 import com.example.testdemo.R;
 
-import java.util.Enumeration;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
+import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 
 public class ThreadActivity extends BaseActivity {
 
@@ -65,7 +63,7 @@ public class ThreadActivity extends BaseActivity {
 //            @Override
 //            public void run() {
 //                for (int i = 0; i < 1000; i++) {
-//                    logUtil.d_2(TAG, "i=" + i);
+//                   logUtil.d(TAG, "i=" + i);
 //                    Thread.yield();
 //                }
 //
@@ -75,7 +73,7 @@ public class ThreadActivity extends BaseActivity {
 //            @Override
 //            public void run() {
 //                for (int i = 0; i < 1000; i++) {
-//                    logUtil.d_2(TAG, "j=" + i);
+//                   logUtil.d(TAG, "j=" + i);
 //                    Thread.yield();
 //                }
 //
@@ -101,7 +99,7 @@ public class ThreadActivity extends BaseActivity {
 //                            } catch (InterruptedException e) {
 //                                e.printStackTrace();
 //                            }
-//                            logUtil.d_2(TAG, Thread.currentThread().getName() + "i=" + i);
+//                           logUtil.d(TAG, Thread.currentThread().getName() + "i=" + i);
 //                            currentThread01 = false;
 //                            lock.notify();
 //                        } else {
@@ -109,7 +107,7 @@ public class ThreadActivity extends BaseActivity {
 //                                lock.wait();
 //                            } catch (InterruptedException e) {
 //                                e.printStackTrace();
-//                                logUtil.d_2(TAG, "error=" + e.getMessage());
+//                               logUtil.d(TAG, "error=" + e.getMessage());
 //                            }
 //                        }
 //                    }
@@ -133,7 +131,7 @@ public class ThreadActivity extends BaseActivity {
 //                            } catch (InterruptedException e) {
 //                                e.printStackTrace();
 //                            }
-//                            logUtil.d_2(TAG, Thread.currentThread().getName() + "i=" + i);
+//                           logUtil.d(TAG, Thread.currentThread().getName() + "i=" + i);
 //                            currentThread01 = true;
 //                            lock.notify();
 //                        } else {
@@ -141,7 +139,7 @@ public class ThreadActivity extends BaseActivity {
 //                                lock.wait();
 //                            } catch (InterruptedException e) {
 //                                e.printStackTrace();
-//                                logUtil.d_2(TAG, "error=" + e.getMessage());
+//                               logUtil.d(TAG, "error=" + e.getMessage());
 //                            }
 //                        }
 //                    }
@@ -160,7 +158,7 @@ public class ThreadActivity extends BaseActivity {
 //            public void run() {
 //                try {
 //                    downLatch.await();//关门等待
-//                    logUtil.d_2(TAG, "thread04启动");
+//                   logUtil.d(TAG, "thread04启动");
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
@@ -170,14 +168,14 @@ public class ThreadActivity extends BaseActivity {
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
-//                logUtil.d_2(TAG, "thread03启动");
+//               logUtil.d(TAG, "thread03启动");
 //                while (true) {
 //                    n++;
 //                    if (n > 100) {
 //                        downLatch.countDown();//开门
 //                    }
 //                    if (n > 150) break;
-//                    logUtil.d_2(TAG, Thread.currentThread().getName() + "---n=" + n);
+//                   logUtil.d(TAG, Thread.currentThread().getName() + "---n=" + n);
 //                }
 //            }
 //        }, "thread03").start();
@@ -210,10 +208,10 @@ public class ThreadActivity extends BaseActivity {
 //                    try {
 //                        lock1.lock();
 //                        Thread.sleep(200);//jvm根据等待时间判断下个线程谁来，，加个sleep时间，，，不然效果不明显
-//                        logUtil.d_2(TAG, Thread.currentThread().getName() + "获得锁");
+//                       logUtil.d(TAG, Thread.currentThread().getName() + "获得锁");
 //                    } catch (Exception e) {
 //                        e.printStackTrace();
-//                        logUtil.d_2(TAG,"error----------");
+//                       logUtil.d(TAG,"error----------");
 //                    } finally {
 //                        lock1.unlock();
 //                    }
@@ -242,17 +240,17 @@ public class ThreadActivity extends BaseActivity {
         if (!currentThread01) {
             lock.wait();
         }
-        logUtil.d_2(TAG, string);
+       logUtil.d(TAG, string);
         lock.notify();
         currentThread01 = true;
     }
 
     private synchronized void print02(String string) throws InterruptedException {
-        logUtil.d_2(TAG, string);
+       logUtil.d(TAG, string);
         if (currentThread01) {
             lock.wait();
         }
-        logUtil.d_2(TAG, string);
+       logUtil.d(TAG, string);
         lock.notify();
         currentThread01 = false;
     }
@@ -268,7 +266,7 @@ public class ThreadActivity extends BaseActivity {
                     try {
                         fairLock.lock();
                         Thread.currentThread().wait(100);
-                        logUtil.d_2("TTTAAAAGGG", Thread.currentThread().getName() + " " + i++);
+                       logUtil.d("TTTAAAAGGG", Thread.currentThread().getName() + " " + i++);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {

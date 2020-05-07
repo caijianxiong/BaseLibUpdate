@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
 
 /**
  * @author caicai

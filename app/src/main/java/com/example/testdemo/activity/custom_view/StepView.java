@@ -8,16 +8,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.example.testdemo.R;
@@ -25,7 +22,7 @@ import com.example.testdemo.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
+import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 
 /**
  * @author caicai
@@ -185,7 +182,7 @@ public class StepView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        logUtil.d_2(TAG, "onSizeChanged: ");
+       logUtil.d(TAG, "onSizeChanged: ");
         contentWidth = w - getPaddingLeft() - getPaddingRight();
         contentHieght = h;
         middleLinWidth = (float) (contentWidth - marginStartAndEnd * 2 - stepsNum * iconWidth) / (stepsNum - 1);
@@ -194,7 +191,7 @@ public class StepView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        logUtil.d_2(TAG, "onDraw: ");
+       logUtil.d(TAG, "onDraw: ");
 //        super.onDraw(canvas);
         setLayerType(LAYER_TYPE_SOFTWARE, null);//此方法画虚线，需要关闭硬件加速
 
@@ -220,7 +217,7 @@ public class StepView extends View {
 //                mCirclePaint.setColor(Color.GRAY);
 //            }
             canvas.drawCircle(x, y, iconWidth / 2, mCirclePaint);
-//            logUtil.d_2(TAG, "cx=" + x + "---iconWidth=" + iconWidth / 2f);
+//           logUtil.d(TAG, "cx=" + x + "---iconWidth=" + iconWidth / 2f);
 
 
             int left = (int) (marginStartAndEnd + (i - 1) * iconWidth + (i - 1) * middleLinWidth);
@@ -250,7 +247,7 @@ public class StepView extends View {
                 maxTextWidth = middleLinWidth + iconWidth;
             }
             if (i == 3) {
-                logUtil.d_2(TAG, "textWidth=" + maxTextWidth + "---reallyWidth=" + mBounds.get(i).width());
+               logUtil.d(TAG, "textWidth=" + maxTextWidth + "---reallyWidth=" + mBounds.get(i).width());
             }
 
             float halfText;

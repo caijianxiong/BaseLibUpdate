@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
+import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 
 public class ThreadPool {
 
@@ -71,23 +71,23 @@ public class ThreadPool {
             Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    logUtil.d_2(TAG, "WeExecutor shutting down.");
+                   logUtil.d(TAG, "WeExecutor shutting down.");
                     executor.shutdown();
                     try {
                         // 等待1秒执行关闭
                         if (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
-                            logUtil.d_2(TAG, "WeExecutor shutdown immediately due to wait timeout.");
+                           logUtil.d(TAG, "WeExecutor shutdown immediately due to wait timeout.");
                             executor.shutdownNow();
                         }
                     } catch (InterruptedException e) {
-                        logUtil.d_e(TAG, e);
+                        logUtil.e(TAG, e);
                         executor.shutdownNow();
                     }
-                    logUtil.d_2(TAG, "WeExecutor shutdown complete.");
+                   logUtil.d(TAG, "WeExecutor shutdown complete.");
                 }
             }));
         } catch (Exception e) {
-            logUtil.d_e(TAG, e);
+            logUtil.d(TAG, e);
             throw new ExceptionInInitializerError(e);
         }
     }
@@ -104,7 +104,7 @@ public class ThreadPool {
         try {
             executor.execute(task);
         } catch (Exception e) {
-            logUtil.d_e("Task executing error:", e);
+            logUtil.d("Task executing error:", e);
             return false;
         }
 
@@ -123,7 +123,7 @@ public class ThreadPool {
         try {
             return executor.submit(task);
         } catch (RejectedExecutionException e) {
-            logUtil.d_e("Task executing error:", e);
+            logUtil.d("Task executing error:", e);
             throw new UnsupportedOperationException("Unable to submit the task, rejected.", e);
         }
     }

@@ -1,23 +1,19 @@
 package com.example.testdemo.activity.custom_view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
-import android.text.Layout;
-import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
+import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 
 /**
  * @author caicai
@@ -150,7 +146,7 @@ public class VerticalStepView extends View {
         contentHeight = h - getPaddingBottom();
 
 
-        logUtil.d_2(TAG,"currentThread:"+Thread.currentThread().getName());
+       logUtil.d(TAG,"currentThread:"+Thread.currentThread().getName());
 
         //根据父布局的宽度，大概计算出，，左侧文字，，右侧文字，中间流程图标占据的宽度
         //各位置水平所占百分比
@@ -166,14 +162,14 @@ public class VerticalStepView extends View {
         for (int i = 0; i < textRight.size(); i++) {
             float hang = (float) Math.ceil(mBoundsRight.get(i).width() / rightTextWidth);
             float canvasTextHeight = hang * rightTextHeight;
-            logUtil.d_2(TAG, "hangCount=" + hang + "----singleHeight=" + rightTextHeight);
+           logUtil.d(TAG, "hangCount=" + hang + "----singleHeight=" + rightTextHeight);
             mHieghtRights.add(canvasTextHeight);
         }
 
-        logUtil.d_2(TAG, "\n");
+       logUtil.d(TAG, "\n");
 
         for (int i = 0; i < mHieghtRights.size(); i++) {
-            logUtil.d_2(TAG, "height：" + mHieghtRights.get(i));
+           logUtil.d(TAG, "height：" + mHieghtRights.get(i));
         }
 
 

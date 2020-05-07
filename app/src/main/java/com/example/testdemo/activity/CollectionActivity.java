@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
 
 /**
  * 集合类别
@@ -37,11 +36,15 @@ public class CollectionActivity extends BaseActivity {
     @Override
     public void initView() {
 
+        throw new NullPointerException("**********there is nullPointerException");
 
     }
 
     @Override
     public void initData() {
+
+
+
 //        HashMap与HashTable  ，ConcurrentHashMap
         /**
          * 1,都继承Map
@@ -69,7 +72,6 @@ public class CollectionActivity extends BaseActivity {
         }
         hashMap.put("1", "newValue:" + 1);
         listMap(hashMap);
-        logUtil.d_1(TAG, "\n----hashMap---end");
         //HashMap 存取值得原理：当我们给put()方法传递键和值时，我们先对键调用hashCode()方法，返回的hashCode用于找到bucket位置来储存Entry对象，同理取对象
 
 
@@ -133,16 +135,13 @@ public class CollectionActivity extends BaseActivity {
     }
 
     private void listHashSet(HashSet<Data> set) {
-        logUtil.d_1(TAG, "HashSet---start");
         Iterator<Data> it = set.iterator();
         while (it.hasNext()) {
-            logUtil.d_1(TAG, "data-people-name:" + it.next().getPeople().getName());
         }
 
     }
 
     private void listConcurrentHashMap(ConcurrentHashMap<String, String> concurrentHashMap) {
-        logUtil.d_1(TAG, "\n conCurrentHashMap---Start");
         listMap(concurrentHashMap);
     }
 
@@ -152,39 +151,31 @@ public class CollectionActivity extends BaseActivity {
         Iterator<Map.Entry<String, String>> entries = map.entrySet().iterator();
         while (entries.hasNext()) {
             String key = entries.next().getKey();
-            logUtil.d_2(TAG, "key=" + key + "--value:" + map.get(key));
         }
-        logUtil.d_1(TAG, "\n\n\n");
 
         //
         Set<Map.Entry<String, String>> entrySet = map.entrySet();//把这个set取出来
         for (Map.Entry<String, String> entry : entrySet) {
-            logUtil.d_2(TAG, "key=" + entry.getKey() + "--value:" + entry.getValue());
         }
 
-        logUtil.d_1(TAG, "\n\n\n");
 
         Set<String> stringSet = map.keySet();
         for (String s : stringSet) {
-            logUtil.d_1(TAG, "key:" + s + "----value:" + map.get(s));
         }
 
     }
 
     private void listTable(Hashtable<String, String> map) {
         listMap(map);
-        logUtil.d_1(TAG, "hashTable特有");
 
         Enumeration<String> en = map.keys();
         while (en.hasMoreElements()) {
             String key = en.nextElement();
-            logUtil.d_1(TAG, "key:" + key + "----value:" + map.get(key));
         }
 
         Enumeration<String> elements = map.elements();
         while (elements.hasMoreElements()) {
             String value = elements.nextElement();
-            logUtil.d_1(TAG, "----value:" + value);
         }
     }
 

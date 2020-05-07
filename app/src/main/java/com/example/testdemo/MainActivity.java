@@ -4,10 +4,12 @@ import android.Manifest;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.testdemo.activity.CollectionActivity;
 import com.example.testdemo.activity.custom_view.CustomViewActivity;
 import com.example.testdemo.activity.handler.HandlerActivity;
+import com.example.testdemo.been.Data;
 import com.example.testdemo.utils.SignUtil;
 
 import java.util.List;
@@ -41,9 +43,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         btnThread.setOnClickListener(this);
         btCustomView.setOnClickListener(this);
 
-        logUtil.d("TAG","onCreate");
-        logUtil.w("TAG","onCreate");
 
+        Toast.makeText(this,"app 启动 ",Toast.LENGTH_SHORT).show();
+        logUtil.d("TAG","打印一条日志");
+        Data data=new Data("2020",26,false,new Data.People("caicai",26));
+        logUtil.i(TAG,data);
+        logUtil.v(TAG,data);
 
     }
 
@@ -53,23 +58,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void initData() {
         //申请权限
-//        String[] permissions=new String[]{Manifest.permission.READ_PHONE_STATE,
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_EXTERNAL_STORAGE};
-//        if (!PermissionHelper.hasPermissions(this, permissions)){
-//            PermissionHelper.requestPermissions(this,
-//                    permissions,
-//                    this);
-//        }
+        String[] permissions=new String[]{Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (!PermissionHelper.hasPermissions(this, permissions)){
+            PermissionHelper.requestPermissions(this,
+                    permissions,
+                    this);
+        }
 
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnCollection:
-                startActivity(CollectionActivity.class);
-                break;
+
 
             case R.id.btnThread:
 //                startActivity(ThreadActivity.class);
@@ -79,6 +82,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case R.id.btCustomView:
                 startActivity(CustomViewActivity.class);
 //                startActivity(StepViewActivity.class);
+                break;
+
+            case R.id.btnCollection:
+                startActivity(CollectionActivity.class);
                 break;
         }
     }
@@ -90,16 +97,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onGranted() {
-
+        logUtil.d(TAG,"权限通过");
     }
 
     @Override
     public void onGranted(List<String> grantedPermission) {
+        logUtil.d(TAG,"部分权限通过");
 
     }
 
     @Override
     public void onDenied(List<String> deniedPermission) {
-
+        logUtil.d(TAG,"权限未通过");
     }
 }

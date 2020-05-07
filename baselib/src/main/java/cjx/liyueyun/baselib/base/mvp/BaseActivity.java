@@ -28,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate: ");
         setContentView(this.getLayoutId());
+        LibApplication.addActivity(this);
         initView();
         initData();
     }
@@ -35,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LibApplication.removeActivity(this);
     }
 
     /**

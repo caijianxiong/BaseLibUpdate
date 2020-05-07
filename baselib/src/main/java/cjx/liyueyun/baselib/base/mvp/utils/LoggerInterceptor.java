@@ -46,7 +46,6 @@ public class LoggerInterceptor implements Interceptor {
             Response.Builder builder = response.newBuilder();
             Response clone = builder.build();
             if (!TextUtils.isEmpty(clone.message()))
-                logUtil.d_2(tag, "message : " + clone.message());
 //
 
             if (showResponse) {
@@ -54,21 +53,17 @@ public class LoggerInterceptor implements Interceptor {
                 if (body != null) {
                     MediaType mediaType = body.contentType();
                     if (mediaType != null) {
-//                        logUtil.d_2(tag, "responseBody's contentType : " + mediaType.toString());
                         if (isText(mediaType)) {
                             String resp = body.string();
                             String url = clone.request().url().toString();
-                            logUtil.d_2(tag, "请求url：" + url + "\n请求结果 : " + resp);
                             body = ResponseBody.create(mediaType, resp);
                             return response.newBuilder().body(body).build();
                         } else {
-                            logUtil.d_2(tag, "responseBody's content : " + " maybe [file part] , too large too print , ignored!");
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            logUtil.d_2(tag, "exception---" + e.getMessage());
         }
 
         return response;
@@ -79,9 +74,6 @@ public class LoggerInterceptor implements Interceptor {
             Headers headers = request.headers();
             if (headers.size() > 0) {
             }
-            logUtil.d_2(tag, "method : " + request.method()
-                    + "***headers : " + (headers.size() > 0 ? headers.toString() : "无header") + "***tag:" + (request.tag() == null ? "无tag" : request.tag())
-                    + "\nurl:" + request.url().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

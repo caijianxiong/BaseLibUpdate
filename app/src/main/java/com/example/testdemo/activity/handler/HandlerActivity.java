@@ -6,15 +6,13 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.testdemo.R;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
-import cjx.liyueyun.baselib.base.mvp.utils.logUtil;
+import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 
 public class HandlerActivity extends BaseActivity {
 
@@ -91,7 +89,7 @@ public class HandlerActivity extends BaseActivity {
 
         @Override
         public boolean handleMessage(Message msg) {
-            logUtil.d_2(TAG, "ThreadName:" + Thread.currentThread().getName() + "----msgWhat:" + msg.what);
+           logUtil.d(TAG, "ThreadName:" + Thread.currentThread().getName() + "----msgWhat:" + msg.what);
             return false;
         }
     }
@@ -105,7 +103,7 @@ public class HandlerActivity extends BaseActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            logUtil.d_2(TAG, "ThreadName:" + Thread.currentThread().getName() + "----msgWhat:" + msg.what);
+           logUtil.d(TAG, "ThreadName:" + Thread.currentThread().getName() + "----msgWhat:" + msg.what);
 
         }
     }
