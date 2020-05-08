@@ -12,7 +12,7 @@ import cjx.baselib.bean.Book;
 
 public class DBUtils {
 
-    public static Uri URI_SMARTDOWNLOAD = AbsContentProvider.buildUri(Book.class);
+    public static Uri URI_BOOK = AbsContentProvider.buildUri(Book.class);
 
 
     /**
@@ -24,7 +24,7 @@ public class DBUtils {
      */
     public static Book queryBookByName(Context context, String bookName) {
         ContentResolver mResolver = context.getContentResolver();
-        Cursor cursor = mResolver.query(URI_SMARTDOWNLOAD, null, "bookName=?", new String[]{
+        Cursor cursor = mResolver.query(URI_BOOK, null, "name=?", new String[]{
                 bookName
         }, null);
         Book bean = new Book();
@@ -38,7 +38,7 @@ public class DBUtils {
 
     public static List<Book> queryAllBook(Context context) {
         ContentResolver mResolver = context.getContentResolver();
-        Cursor cursor = mResolver.query(URI_SMARTDOWNLOAD, null, null, null, null);
+        Cursor cursor = mResolver.query(URI_BOOK, null, null, null, null);
         List<Book> books=new ArrayList<>();
         while (cursor.moveToNext()) {
             Book bean = new Book();
@@ -50,29 +50,29 @@ public class DBUtils {
     }
 
     /**
-     * 保存一本书
+     * 保存一本书,数据库不存在insert  ，存在update
      *
      * @param context
      */
-    public static void insertBook(Context context, Book book) {
+    public static void saveBook(Context context, Book book) {
         ContentResolver mResolver = context.getContentResolver();
-        mResolver.insert(URI_SMARTDOWNLOAD, book.beanToValues());
+        Cursor cursor = mResolver.query(URI_BOOK,
+                null,
+                "name=?",
+                new String[]{book.name},
+                null,null);
+        if (cursor==null)return;
+        if (cursor.moveToNext()){
+            //数据库存在数据，更新
+            mResolver.update(URI_BOOK, book.beanToValues(), "name=?",
+                    new String[]{book.name});
+        }else {
+            //新增
+            mResolver.insert(URI_BOOK, book.beanToValues());
+        }
+        cursor.close();
     }
 
-    /**
-     * 实时更新一本书
-     *
-     * @param context
-     */
-    public static void updateBook(Context context, Book book) {
-        ContentResolver mResolver = context.getContentResolver();
-
-            mResolver.update(URI_SMARTDOWNLOAD, book.beanToValues(), "name=? and price=?",
-                    new String[]{
-                           book.name, book.price + ""
-                    });
-
-    }
 
     /**
      * 删除一本书
@@ -82,7 +82,7 @@ public class DBUtils {
      */
     public static void deleteSmartDown(Context context, String bookName) {
         ContentResolver mResolver = context.getContentResolver();
-        mResolver.delete(URI_SMARTDOWNLOAD, "name=?", new String[]{
+        mResolver.delete(URI_BOOK, "name=?", new String[]{
                 bookName
         });
     }

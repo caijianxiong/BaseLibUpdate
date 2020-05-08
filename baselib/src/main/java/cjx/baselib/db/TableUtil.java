@@ -6,16 +6,20 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 根据实体类，获取表名，，创建SQ语句
+ */
 public class TableUtil {
 
     /**
      * 获取表名，默认取得是实体类名,也可以给实体类添加注解 @Table(name = "bookTableName")指定表名
+     *
      * @param c 实体类
      * @return
      */
     public static String getTableName(Class<? extends BaseBean<?>> c) {
         String name = null;
-        Table tableNameAnnotation = c.getAnnotation(Table.class);
+        TableName tableNameAnnotation = c.getAnnotation(TableName.class);
         if (tableNameAnnotation != null) {
             name = tableNameAnnotation.name();
         }
@@ -31,19 +35,20 @@ public class TableUtil {
      * @param c
      * @return
      */
-    public final static List<String> getCreateStatments(Class<? extends BaseBean<?>> c) {
-        final List<String> createStatments = new ArrayList<String>();
-        final List<String> indexStatments = new ArrayList<String>();
+    public static List<String> getCreateStatements(Class<? extends BaseBean<?>> c) {
+        List<String> createStatments = new ArrayList<String>();
+        List<String> indexStatments = new ArrayList<String>();
 
-        final StringBuilder builder = new StringBuilder();
-        final String tableName = getTableName(c);
+        StringBuilder builder = new StringBuilder();
+        String tableName = getTableName(c);
         builder.append("CREATE TABLE ");
         builder.append(tableName);
         builder.append(" (");
         int columnNum = 0;
-        for (final Field f : c.getFields()) {
+        Field[] fields = c.getFields();
+        for (Field f : fields) {
             f.setAccessible(true);
-            final TableColumn tableColumnAnnotation = f.getAnnotation(TableColumn.class);
+            TableColumn tableColumnAnnotation = f.getAnnotation(TableColumn.class);
             if (tableColumnAnnotation != null) {
                 columnNum++;
                 String columnName = f.getName();

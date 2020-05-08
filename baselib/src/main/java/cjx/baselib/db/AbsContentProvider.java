@@ -9,7 +9,7 @@ import android.util.Log;
 
 public abstract class AbsContentProvider extends ContentProvider {
 
-    private static String TAG="IssContentProvider";
+    private static String TAG="AbsContentProvider";
     public static String CONTENT_TYPE = "vnd.android.cursor.dir/iss.db";
 
     protected SQLiteDatabase mDB;
@@ -38,9 +38,9 @@ public abstract class AbsContentProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         String tableName = getTableName(uri);
         long result = mDB.insert(tableName, null, values);
-        Log.d(TAG, "insert: tableName:"+tableName+"   新增一条数据");
         if (result != -1) {
             getContext().getContentResolver().notifyChange(uri, null);
+            Log.d(TAG, "insert: tableName:"+tableName+"   新增一条数据");
         }
         return buildResultUri(tableName, result);
     }
@@ -85,6 +85,7 @@ public abstract class AbsContentProvider extends ContentProvider {
         int result = mDB.update(tableName, values, selection, selectionArgs);
         if (result != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
+            Log.d(TAG, "update: tableName:"+tableName+"   更新一条数据");
         }
         return result;
     }

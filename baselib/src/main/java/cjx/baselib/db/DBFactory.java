@@ -12,7 +12,7 @@ public class DBFactory {
     private DBConfig mConfig;
     private SQLiteDatabase mSQLiteDB;
 
-    private IssDBOpenHelper mDBOpenHelper;
+    private MyDBOpenHelper mDBOpenHelper;
 
     private final Context mContext;
 
@@ -42,9 +42,13 @@ public class DBFactory {
         return mConfig;
     }
 
+    /**
+     * 获取数据库对象
+     * @return
+     */
     public SQLiteDatabase open() {
         if(mSQLiteDB==null){
-            mDBOpenHelper = new IssDBOpenHelper(mContext, mConfig.dbName, null, mConfig.dbVersion);
+            mDBOpenHelper = new MyDBOpenHelper(mContext, mConfig.dbName, null, mConfig.dbVersion);
             mSQLiteDB = mDBOpenHelper.getWritableDatabase();
         }
         return mSQLiteDB;
@@ -57,59 +61,57 @@ public class DBFactory {
     }
 
     public void beginTransaction() {
-        if(mSQLiteDB==null){
+        if(mSQLiteDB!=null){
             mSQLiteDB.beginTransaction();
         }
     }
 
     public void endTransaction() {
-        if (mSQLiteDB==null&&mSQLiteDB.inTransaction()) {
+        if (mSQLiteDB!=null&&mSQLiteDB.inTransaction()) {
             mSQLiteDB.endTransaction();
         }
     }
 
     public void setTransactionSuccessful() {
-        if (mSQLiteDB==null){
+        if (mSQLiteDB!=null){
             mSQLiteDB.setTransactionSuccessful();
         }
     }
 
-    private final class IssDBOpenHelper extends SQLiteOpenHelper {
+    private final class MyDBOpenHelper extends SQLiteOpenHelper {
 
-        public IssDBOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        public MyDBOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
         }
 
+        //创建表格
         @Override
         public void onCreate(SQLiteDatabase db) {
+            //全部表，建一边
             for (Class<? extends BaseBean<?>> table : mConfig.tableList) {
                 try {
-                    for (String statment : TableUtil.getCreateStatments(table)) {
-                        Log.d(TAG, statment);
-                        db.execSQL(statment);
+                    for (String statement : TableUtil.getCreateStatements(table)) {
+                        Log.d(TAG, "创建表格："+statement);
+                        db.execSQL(statement);
                     }
                 } catch (Throwable e) {
-                    Log.e(TAG, "Can't create table " + table.getSimpleName()+"  error:"+e.getMessage());
+                    Log.e(TAG, "onCreate  Can't create table " + table.getSimpleName()+"  error:"+e.getMessage());
                 }
             }
-
-            /**
-             * 初始化数据
-             */
-            // initData();
-
         }
 
+        //更新表格
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.d(TAG, "onUpgrade: " + oldVersion + " >> " + newVersion);
-            for (Class<? extends BaseBean<?>> table : mConfig.tableList) {
-                try {
-                    db.execSQL("DROP TABLE IF EXISTS " + TableUtil.getTableName(table));
-                } catch (Throwable e) {
-                    Log.e(TAG, "Can't create table " + table.getSimpleName());
-                }
-            }
+            //SQ表格不存在才去创建，
+//            for (Class<? extends BaseBean<?>> table : mConfig.tableList) {
+//                try {
+//                    db.execSQL("DROP TABLE IF EXISTS " + TableUtil.getTableName(table));
+//                } catch (Throwable e) {
+//                    Log.e(TAG, "onUpgrade Can't create table " + table.getSimpleName());
+//                }
+//            }
             onCreate(db);
         }
 

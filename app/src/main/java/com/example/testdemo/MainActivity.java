@@ -89,13 +89,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 book.name="book"+(count++);
                 book.price=count*2;
                 book.isJava=true;
-                DBUtils.insertBook(this,book);
+                DBUtils.saveBook(this,book);
                 break;
 
 
             case R.id.btQueryBook:
                 List<Book> books=DBUtils.queryAllBook(this);
-                Log.d(TAG, "onClick: queryAllBook  size:"+books.size());
+                Log.d(TAG, "onClick: queryAllBook  size:"+MyApplication.getmGson().toJson(books));
                 break;
         }
     }

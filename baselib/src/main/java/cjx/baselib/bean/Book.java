@@ -7,12 +7,13 @@ import android.text.TextUtils;
 import org.json.JSONObject;
 
 import cjx.baselib.db.BaseBean;
-import cjx.baselib.db.Table;
+import cjx.baselib.db.TableName;
 import cjx.baselib.db.TableColumn;
-@Table(name = "bookTableName")
+
+@TableName(name = "bookTableName")
 public class Book extends BaseBean<Book> {
 
-    @TableColumn(type = TableColumn.Types.TEXT, isNotNull = true)
+    @TableColumn(type = TableColumn.Types.TEXT,isUnique = true,isNotNull = true)
     public String name;
 
     @TableColumn(type = TableColumn.Types.INTEGER, isNotNull = true)
@@ -20,6 +21,8 @@ public class Book extends BaseBean<Book> {
 
     @TableColumn(type = TableColumn.Types.BLOB, isNotNull = true)
     public boolean isJava;
+
+    public String other;
 
 
     @Override
@@ -47,9 +50,8 @@ public class Book extends BaseBean<Book> {
         if (!TextUtils.isEmpty(name)) {
             values.put("name", name);
         }
-
-        values.put("price",price);
-        values.put("isJava",isJava);
+        values.put("price", price);
+        values.put("isJava", isJava);
         return values;
     }
 }

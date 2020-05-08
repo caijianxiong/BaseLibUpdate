@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 
 public abstract class BaseBean<T> implements Serializable {
 
-    //isPrimary=true一张表只能有一个参数为true，否则创建表会失败
+    //isPrimary一张表只能有一个参数为true，唯一标示，自增主键，不可多个参数设置
     @TableColumn(type = TableColumn.Types.INTEGER, isPrimary = true)
     public static final String _ID = "_id";
 
@@ -66,7 +66,7 @@ public abstract class BaseBean<T> implements Serializable {
                         values.put(f.getName(), (byte[]) f.get(this));
                     } else if (tableColumnAnnotation.type() == TableColumn.Types.TEXT) {
                         values.put(f.getName(), f.get(this).toString());
-                    } else {
+                    } else {//其他类型转换成string
                         values.put(f.getName(), f.get(this).toString());
                     }
                 }
