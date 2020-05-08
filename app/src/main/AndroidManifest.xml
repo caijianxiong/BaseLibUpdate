@@ -36,7 +36,7 @@
         <activity android:name=".activity.handler.HandlerActivity" />
 
         <provider
-            android:name="cjx.liyueyun.baselib.base.mvp.db.MyContentProvider"
+            android:name="cjx.baselib.db.MyContentProvider"
             android:authorities="com.sss.contentProvider" />
     </application>
 

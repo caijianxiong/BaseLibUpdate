@@ -3,17 +3,15 @@ package com.example.testdemo.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.testdemo.MainActivity;
 import com.example.testdemo.R;
 
 import java.util.List;
 
-import cjx.liyueyun.baselib.base.mvp.BaseActivity;
-import cjx.liyueyun.baselib.base.mvp.log.logUtil;
-import cjx.liyueyun.baselib.base.mvp.permission.PermissionHelper;
+import cjx.baselib.BaseActivity;
+import cjx.baselib.log.logUtil;
+import cjx.baselib.permission.PermissionHelper;
 
 public class SplishActivity extends BaseActivity implements PermissionHelper.PermissionListener {
 

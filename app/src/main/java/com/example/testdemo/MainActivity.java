@@ -1,6 +1,5 @@
 package com.example.testdemo;
 
-import android.Manifest;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,20 +9,14 @@ import com.example.testdemo.activity.CollectionActivity;
 import com.example.testdemo.activity.custom_view.CustomViewActivity;
 import com.example.testdemo.activity.handler.HandlerActivity;
 import com.example.testdemo.been.Data;
-import com.example.testdemo.utils.SignUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.prefs.PreferencesFactory;
 
-import cjx.liyueyun.baselib.base.mvp.BaseActivity;
-import cjx.liyueyun.baselib.base.mvp.bean.Book;
-import cjx.liyueyun.baselib.base.mvp.db.DBUtils;
-import cjx.liyueyun.baselib.base.mvp.log.logUtil;
-import cjx.liyueyun.baselib.base.mvp.net.HttpUtils;
-import cjx.liyueyun.baselib.base.mvp.net.mInterface.MyCallback;
-import cjx.liyueyun.baselib.base.mvp.permission.PermissionHelper;
+import cjx.baselib.BaseActivity;
+import cjx.baselib.bean.Book;
+import cjx.baselib.db.DBUtils;
+import cjx.baselib.log.logUtil;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 

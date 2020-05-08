@@ -11,10 +11,10 @@ import android.widget.Toast;
 import com.example.testdemo.MainActivity;
 import com.example.testdemo.MyApplication;
 
-import cjx.liyueyun.baselib.base.mvp.LibApplication;
-import cjx.liyueyun.baselib.base.mvp.log.logUtil;
+import cjx.baselib.LibApplication;
+import cjx.baselib.log.logUtil;
 
-import static cjx.liyueyun.baselib.base.mvp.LibApplication.application;
+import static cjx.baselib.LibApplication.application;
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 

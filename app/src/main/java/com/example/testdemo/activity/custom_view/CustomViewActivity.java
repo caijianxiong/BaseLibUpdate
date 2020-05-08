@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import com.example.testdemo.R;
 
-import cjx.liyueyun.baselib.base.mvp.BaseActivity;
+import cjx.baselib.BaseActivity;
 
 public class CustomViewActivity extends BaseActivity implements View.OnClickListener {
 

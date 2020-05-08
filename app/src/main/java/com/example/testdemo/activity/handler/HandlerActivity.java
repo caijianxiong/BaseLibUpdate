@@ -11,8 +11,8 @@ import android.widget.Button;
 
 import com.example.testdemo.R;
 
-import cjx.liyueyun.baselib.base.mvp.BaseActivity;
-import cjx.liyueyun.baselib.base.mvp.log.logUtil;
+import cjx.baselib.BaseActivity;
+import cjx.baselib.log.logUtil;
 
 public class HandlerActivity extends BaseActivity {
 

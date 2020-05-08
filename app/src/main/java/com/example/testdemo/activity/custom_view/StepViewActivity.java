@@ -1,11 +1,8 @@
 package com.example.testdemo.activity.custom_view;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import com.example.testdemo.R;
 
-import cjx.liyueyun.baselib.base.mvp.BaseActivity;
+import cjx.baselib.BaseActivity;
 
 public class StepViewActivity extends BaseActivity {
 

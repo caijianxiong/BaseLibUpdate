@@ -10,8 +10,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
 
-import cjx.liyueyun.baselib.base.mvp.BaseActivity;
-import cjx.liyueyun.baselib.base.mvp.log.logUtil;
+import cjx.baselib.BaseActivity;
+import cjx.baselib.log.logUtil;
 
 public class ThreadActivity extends BaseActivity {
 

@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import cjx.liyueyun.baselib.base.mvp.BaseActivity;
+import cjx.baselib.BaseActivity;
 
 /**
  * 集合类别
