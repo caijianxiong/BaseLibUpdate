@@ -12,21 +12,24 @@ import com.example.testdemo.activity.handler.HandlerActivity;
 import com.example.testdemo.been.Data;
 import com.example.testdemo.utils.SignUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.prefs.PreferencesFactory;
 
 import cjx.liyueyun.baselib.base.mvp.BaseActivity;
+import cjx.liyueyun.baselib.base.mvp.bean.Book;
+import cjx.liyueyun.baselib.base.mvp.db.DBUtils;
 import cjx.liyueyun.baselib.base.mvp.log.logUtil;
 import cjx.liyueyun.baselib.base.mvp.net.HttpUtils;
 import cjx.liyueyun.baselib.base.mvp.net.mInterface.MyCallback;
 import cjx.liyueyun.baselib.base.mvp.permission.PermissionHelper;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, PermissionHelper.PermissionListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     private Map<String, String> hashMap;
-    private Button btnCollection, btnThread, btCustomView;
+    private Button btnCollection, btnThread, btCustomView,btAddBook,btQueryBook;
 
     @Override
     public int getLayoutId() {
@@ -38,10 +41,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         btnCollection = (Button) findViewById(R.id.btnCollection);
         btnThread = (Button) findViewById(R.id.btnThread);
         btCustomView = (Button) findViewById(R.id.btCustomView);
+        btAddBook= (Button) findViewById(R.id.btAddBook);
+        btQueryBook= (Button) findViewById(R.id.btQueryBook);
 
         btnCollection.setOnClickListener(this);
         btnThread.setOnClickListener(this);
         btCustomView.setOnClickListener(this);
+        btAddBook.setOnClickListener(this);
+        btQueryBook.setOnClickListener(this);
 
 
         Toast.makeText(this,"app 启动 ",Toast.LENGTH_SHORT).show();
@@ -57,18 +64,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void initData() {
-        //申请权限
-        String[] permissions=new String[]{Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE};
-        if (!PermissionHelper.hasPermissions(this, permissions)){
-            PermissionHelper.requestPermissions(this,
-                    permissions,
-                    this);
-        }
+//        List<Book> books=new ArrayList<>();
+//        for (int i=0;i<5;i++){
+//
+//        }
 
     }
 
+    private int count=0;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -87,27 +90,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case R.id.btnCollection:
                 startActivity(CollectionActivity.class);
                 break;
+
+            case R.id.btAddBook:
+                Book book=new Book();
+                book.name="book"+(count++);
+                book.price=count*2;
+                book.isJava=true;
+                DBUtils.insertBook(this,book);
+                break;
+
+
+            case R.id.btQueryBook:
+                List<Book> books=DBUtils.queryAllBook(this);
+                Log.d(TAG, "onClick: queryAllBook  size:"+books.size());
+                break;
         }
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionHelper.onRequestPermissionsResult(requestCode,permissions,grantResults);
-    }
 
-    @Override
-    public void onGranted() {
-        logUtil.d(TAG,"权限通过");
-    }
-
-    @Override
-    public void onGranted(List<String> grantedPermission) {
-        logUtil.d(TAG,"部分权限通过");
-
-    }
-
-    @Override
-    public void onDenied(List<String> deniedPermission) {
-        logUtil.d(TAG,"权限未通过");
-    }
 }

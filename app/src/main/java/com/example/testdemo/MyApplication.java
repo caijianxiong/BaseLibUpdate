@@ -32,7 +32,7 @@ public class MyApplication extends LibApplication {
                 .build();
 
         packgeName = this.getPackageName();
-        CrashHandler.getInstance().init(this);
+        CrashHandler.getInstance().init();
 
     }
 
