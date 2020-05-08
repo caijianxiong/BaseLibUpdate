@@ -84,6 +84,8 @@ public class DBFactory {
             super(context, name, factory, version);
         }
 
+
+
         //创建表格
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -91,8 +93,7 @@ public class DBFactory {
             for (Class<? extends BaseBean<?>> table : mConfig.tableList) {
                 try {
                     for (String statement : TableUtil.getCreateStatements(table)) {
-                        Log.d(TAG, "创建表格："+statement);
-                        db.execSQL(statement);
+                        createTable(db, statement);
                     }
                 } catch (Throwable e) {
                     Log.e(TAG, "onCreate  Can't create table " + table.getSimpleName()+"  error:"+e.getMessage());
@@ -100,21 +101,54 @@ public class DBFactory {
             }
         }
 
-        //更新表格
+        //数据库升级
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.d(TAG, "onUpgrade: " + oldVersion + " >> " + newVersion);
-            //SQ表格不存在才去创建，
-//            for (Class<? extends BaseBean<?>> table : mConfig.tableList) {
-//                try {
-//                    db.execSQL("DROP TABLE IF EXISTS " + TableUtil.getTableName(table));
-//                } catch (Throwable e) {
-//                    Log.e(TAG, "onUpgrade Can't create table " + table.getSimpleName());
-//                }
-//            }
-            onCreate(db);
+
+            for (Class<? extends BaseBean<?>> table : mConfig.tableList) {
+                if (TableUtil.isTableExist(db,table)){
+                    //表存在
+                    // 1，新增字段  2，删减字段(未处理) 3，无变化
+                    try {
+                        for (String statement:TableUtil.getAlertStatements(table,oldVersion,newVersion)){
+                            alertTable(db,statement);
+                        }
+                    }catch (Throwable e){
+                        Log.e(TAG, "onUpgrade  Can't alert tableColumn " + table.getSimpleName()+"  error:"+e.getMessage());
+                    }
+                }else {
+                    //表不存在---》创建表
+                    try {
+                        for (String statement : TableUtil.getCreateStatements(table)) {
+                            createTable(db, statement);
+                        }
+                    } catch (Throwable e) {
+                        Log.e(TAG, "onUpgrade  Can't create table " + table.getSimpleName()+"  error:"+e.getMessage());
+                    }
+                }
+            }
+//            onCreate(db);
+        }
+        //新增表字段
+        private void alertTable(SQLiteDatabase db, String statement){
+            Log.d(TAG, "新增表列："+statement);
+            db.execSQL(statement);
         }
 
+
+        //新建表及创建表格索引
+        private void createTable(SQLiteDatabase db, String statement) {
+            Log.d(TAG, "创建表格："+statement);
+            db.execSQL(statement);
+        }
+
+
+        //数据库版本回退
+        @Override
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            super.onDowngrade(db, oldVersion, newVersion);
+        }
     }
 
     public void cleanTable(String tableName, int maxSize, int batchSize) {

@@ -50,7 +50,7 @@ public class DBConfig {
             return this;
         }
 
-        public Builder addTatble(Class<? extends BaseBean<?>> table) {
+        public Builder addTable(Class<? extends BaseBean<?>> table) {
             tableList.add(table);
             return this;
         }

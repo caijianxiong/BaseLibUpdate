@@ -23,4 +23,6 @@ public  @interface TableColumn {
     boolean isNotNull() default false;//是否不能为空
 
     boolean isUnique() default false; //表中元素唯一性约束(表中元素值唯一，，插入相同的值会插入失败)，表中可以多个元素添加唯一性约束
+
+    int addVersion() default 0;//该元素，插入表时的版本，用于判断是不是需要新增表字段
 }

@@ -40,6 +40,11 @@
             android:text="数据库查询书籍"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btDeleteBook"
+            android:text="数据库删除书籍"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
         <android.support.v7.widget.RecyclerView

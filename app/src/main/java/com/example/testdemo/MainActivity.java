@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     private Map<String, String> hashMap;
-    private Button btnCollection, btnThread, btCustomView,btAddBook,btQueryBook;
+    private Button btnCollection, btnThread, btCustomView,btAddBook,btQueryBook,btDeleteBook;
 
     @Override
     public int getLayoutId() {
@@ -36,12 +36,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btCustomView = (Button) findViewById(R.id.btCustomView);
         btAddBook= (Button) findViewById(R.id.btAddBook);
         btQueryBook= (Button) findViewById(R.id.btQueryBook);
+        btDeleteBook= (Button) findViewById(R.id.btDeleteBook);
 
         btnCollection.setOnClickListener(this);
         btnThread.setOnClickListener(this);
         btCustomView.setOnClickListener(this);
         btAddBook.setOnClickListener(this);
         btQueryBook.setOnClickListener(this);
+        btDeleteBook.setOnClickListener(this);
 
 
         Toast.makeText(this,"app 启动 ",Toast.LENGTH_SHORT).show();
@@ -86,9 +88,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.btAddBook:
                 Book book=new Book();
-                book.name="book"+(count++);
+                int n=++count;
+                book.name="book"+(n);
                 book.price=count*2;
                 book.isJava=true;
+                book.other="other"+(n);
                 DBUtils.saveBook(this,book);
                 break;
 
@@ -96,6 +100,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btQueryBook:
                 List<Book> books=DBUtils.queryAllBook(this);
                 Log.d(TAG, "onClick: queryAllBook  size:"+MyApplication.getmGson().toJson(books));
+                break;
+
+            case R.id.btDeleteBook:
                 break;
         }
     }
