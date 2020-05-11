@@ -80,7 +80,7 @@ public class DBUtils {
      * @param context
      * @param bookName
      */
-    public static void deleteSmartDown(Context context, String bookName) {
+    public static void deleteBook(Context context, String bookName) {
         ContentResolver mResolver = context.getContentResolver();
         mResolver.delete(URI_BOOK, "name=?", new String[]{
                 bookName

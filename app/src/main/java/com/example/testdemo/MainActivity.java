@@ -9,6 +9,7 @@ import com.example.testdemo.activity.CollectionActivity;
 import com.example.testdemo.activity.custom_view.CustomViewActivity;
 import com.example.testdemo.activity.handler.HandlerActivity;
 import com.example.testdemo.been.Data;
+import com.example.testdemo.dbmanager.BookDbManager;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Map;
 import cjx.baselib.BaseActivity;
 import cjx.baselib.bean.Book;
 import cjx.baselib.db.DBUtils;
+import cjx.baselib.db.manager.DBManagerFactory;
 import cjx.baselib.log.logUtil;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -63,6 +65,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //        for (int i=0;i<5;i++){
 //
 //        }
+
+
+        BookDbManager bookDbManager= DBManagerFactory.createDBManager(BookDbManager.class);
 
     }
 

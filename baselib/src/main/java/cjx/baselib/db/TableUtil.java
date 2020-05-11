@@ -128,6 +128,12 @@ public class TableUtil {
     }
 
 
+    /**
+     *判断数据库表是否存在
+     * @param db
+     * @param c
+     * @return
+     */
     public static boolean isTableExist(SQLiteDatabase db ,Class<? extends BaseBean<?>> c){
         boolean result = false;
         String tabName=getTableName(c);
