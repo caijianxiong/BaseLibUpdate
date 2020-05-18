@@ -15,27 +15,27 @@ public class BookDbManager extends AbsDBManager<Book> {
 
     @NonNull
     @Override
-    protected Uri getTableUri() {
+    public Uri getTableUri() {
         return null;
     }
 
     @Override
-    protected void saveData(Book data) {
+    public void saveData(Book data) {
 
     }
 
     @Override
-    protected void removeData(Book data) {
+    public void removeData(Book data) {
 
     }
 
     @Override
-    protected void cleanTable() {
+    public void cleanTable() {
 
     }
 
     @Override
-    protected void deleteTable() {
+    public void deleteTable() {
 
     }
 }

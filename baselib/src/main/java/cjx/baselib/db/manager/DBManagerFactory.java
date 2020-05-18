@@ -1,7 +1,4 @@
 package cjx.baselib.db.manager;
-
-import cjx.baselib.bean.Book;
-import cjx.baselib.db.BaseBean;
 import cjx.baselib.log.logUtil;
 
 public class DBManagerFactory {

@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
+import cjx.baselib.net.mInterface.AbsCommon;
 import cjx.baselib.net.mInterface.IRequest;
 import cjx.baselib.net.mInterface.MGet;
 import cjx.baselib.net.mInterface.MyCallback;
@@ -16,12 +16,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetRequest implements IRequest, MGet {
+public class GetRequest extends AbsCommon implements IRequest, MGet {
 
-    private HashMap<String, String> headers;
     private OkHttpClient httpClient;
     private Request.Builder builder;
-    private boolean callOnMain=false;
     public GetRequest( OkHttpClient httpClient) {
         this.httpClient=httpClient;
         builder=new Request.Builder();
@@ -59,6 +57,12 @@ public class GetRequest implements IRequest, MGet {
     }
 
     @Override
+    public GetRequest doOnMain() {
+       setDoOnMain();
+        return this;
+    }
+
+    @Override
     public GetRequest url(String url) {
         builder.url(url);
         return this;
@@ -66,23 +70,14 @@ public class GetRequest implements IRequest, MGet {
 
     @Override
     public GetRequest header(String key, String value) {
-        if (headers == null)
-            headers = new HashMap<>();
-        headers.put(key, value);
+        setHeader(key, value);
         return this;
     }
 
     @Override
     public GetRequest headers(Map<String, String> map) {
-        if (headers == null)
-            headers = new HashMap<>();
-        headers.putAll(map);
+        setHeaders(map);
         return this;
-    }
-
-    @Override
-    public void doOnMain() {
-
     }
 
 

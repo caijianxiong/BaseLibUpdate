@@ -17,7 +17,7 @@ import cjx.baselib.log.logUtil;
 public abstract class AbsDBManager<T extends BaseBean<T>> {
     private static String TAG = "AbsDBManager";
     private Uri uri;
-    protected ContentResolver mResolver;
+    public ContentResolver mResolver;
 
 
     public AbsDBManager() {
@@ -26,9 +26,9 @@ public abstract class AbsDBManager<T extends BaseBean<T>> {
     }
 
     @NonNull
-    protected abstract Uri getTableUri();
+    public abstract Uri getTableUri();
 
-    protected List<T> queryAll(Class<T> tClass) {
+    public List<T> queryAll(Class<T> tClass) {
 
         Cursor cursor = mResolver.query(uri, null, null, null, null);
 
@@ -46,14 +46,14 @@ public abstract class AbsDBManager<T extends BaseBean<T>> {
         return books;
     }
 
-    protected abstract void saveData(T data);
+    public abstract void saveData(T data);
 
-    protected abstract void removeData(T data);
+    public abstract void removeData(T data);
 
     //清除表数据
-    protected abstract void cleanTable();
+    public abstract void cleanTable();
 
-    protected abstract void deleteTable();//删除表格
+    public abstract void deleteTable();//删除表格
 
 
     private T classToT(T data) {

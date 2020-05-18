@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import cjx.baselib.net.mInterface.AbsCommon;
 import cjx.baselib.net.mInterface.IRequest;
 import cjx.baselib.net.mInterface.MPost;
 import cjx.baselib.net.mInterface.MyCallback;
@@ -30,7 +31,7 @@ import okhttp3.Response;
  * param添加的参数只在，提交键值对和表单数据才有用
  * header都生效
  */
-public class PostRequest implements IRequest, MPost {
+public class PostRequest extends AbsCommon implements IRequest, MPost {
 
     private OkHttpClient httpClient;
     private Request.Builder builder;
@@ -82,9 +83,23 @@ public class PostRequest implements IRequest, MPost {
     }
 
     @Override
-    public void doOnMain() {
-
+    public PostRequest doOnMain() {
+        setDoOnMain();
+        return this;
     }
+
+    @Override
+    public PostRequest header(String key, String value) {
+        setHeader(key, value);
+        return this;
+    }
+
+    @Override
+    public PostRequest headers(Map<String, String> map) {
+        setHeaders(map);
+        return this;
+    }
+
 
 
     @Override
@@ -143,21 +158,6 @@ public class PostRequest implements IRequest, MPost {
         return this;
     }
 
-    @Override
-    public PostRequest header(String key, String value) {
-        if (headers == null)
-            headers = new HashMap<>();
-        headers.put(key, value);
-        return this;
-    }
-
-    @Override
-    public PostRequest headers(Map<String, String> map) {
-        if (headers == null)
-            headers = new HashMap<>();
-        headers.putAll(map);
-        return this;
-    }
 
     private void addHeaders() {
         if (headers == null) return;
